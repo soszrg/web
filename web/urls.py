@@ -1,4 +1,5 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url, defaults
+import polls
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -16,3 +17,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^polls/', include('polls.urls')),
 )
+
+handler404 = 'web.web.views.Page_Not_Found'

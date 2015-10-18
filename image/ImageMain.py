@@ -2,9 +2,9 @@
 
 import sys
 import os
-import urllib, urllib2
+import urllib2
 from bs4 import BeautifulSoup
-from SpiderBase import SpiderBase
+from baseClass.SpiderBase import SpiderBase
 import socket
 from time import sleep
 
@@ -17,6 +17,7 @@ AllPic = 'http://www.meizitu.com/a/list_1_'
 
 Max_Page_Num = 30
 DirName = 'meizitu/'
+GetUrl = QingchunUrl
 
 class Image(SpiderBase):
     __AllImageUrls = []
@@ -92,8 +93,8 @@ class Image(SpiderBase):
                     print '===page[%d] to max page===' %self.__PageCount
                     self.__PageCount = 1
                     return
-                print 'next page'
-                self.GetSifangImageUrl('%s%d.html' %(AllPic,self.__PageCount))
+                
+                self.GetSifangImageUrl('%s%d.html' %(GetUrl,self.__PageCount))
         
         if self.__PageCount != 1:        
             print '===All page[%d] has been gotten===' %self.__PageCount
@@ -117,8 +118,15 @@ class Image(SpiderBase):
         albumName = baseSoup('div', {'class':"metaRight"})[0].h2.get_text()
         if os.path.exists(DirName+ albumName) == False:
                 os.mkdir(DirName+ albumName)
-                
-        picUrls = baseSoup.find('div', id='picture').select('img')
+
+        picDiv = baseSoup.find('div', id='picture')
+#         picUrls = 
+        picUrls = ''
+        if picDiv == None:
+            icUrls = baseSoup('div', {'class':'postContent'})[0]('img', {'class':'scrollLoading'})
+        else:
+            picUrls=picDiv.select('img')
+        
         for img in picUrls:
             sleep(1)
             imgSrc = img['src']
@@ -150,35 +158,35 @@ class Image(SpiderBase):
 #                 print e
 #                 print "===>img src:%s" %imgSrc
                 
-if __name__ == "__main__":
-    print 'start project'
-    reload(sys)
-    
-    if os.path.exists(DirName) == False:
-                os.mkdir(DirName)
-                
-    socket.setdefaulttimeout(10)
-        
-#     sys.setdefaultencoding('utf-8')
-    imageStart = Image(url=AllPic+'1.html', name=15)
-    imageStart.GetSifangImageUrl()
-    print '===Get blums end, Start to getting image,sum[%d]===' %imageStart.AllBlumCount()
-    taskList = []
-    for i in range(15):
-        newTask = Image(name=i)
-        taskList.append(newTask)
-        newTask.start();
-        
-        
-    imageStart.start()
-    taskList.append(imageStart)
-#      
-    print '===Wait for getting image data ending==='
-    for task in taskList:
-        print "wait %s exit" %task.name
-        task.join()
-    
-    print '###Get image end'
-        
-    
-    
+# if __name__ == "__main__":
+#     print 'start project'
+#     reload(sys)
+#     
+#     if os.path.exists(DirName) == False:
+#                 os.mkdir(DirName)
+#                 
+#     socket.setdefaulttimeout(10)
+#         
+# #     sys.setdefaultencoding('utf-8')
+#     imageStart = Image(url=GetUrl+'1.html', name=15)
+#     imageStart.GetSifangImageUrl()
+#     print '===Get blums end, Start to getting image,sum[%d]===' %imageStart.AllBlumCount()
+#     taskList = []
+#     for i in range(15):
+#         newTask = Image(name=i)
+#         taskList.append(newTask)
+#         newTask.start();
+#         
+#         
+#     imageStart.start()
+#     taskList.append(imageStart)
+# #      
+#     print '===Wait for getting image data ending==='
+#     for task in taskList:
+#         print "wait %s exit" %task.name
+#         task.join()
+#     
+#     print '###Get image end'
+#         
+#     
+#     
