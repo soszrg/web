@@ -24,11 +24,12 @@ class QiuBai:
         for one in allStatus:
             self.ParserDiv(one)
         
-        nextPageUrl = UrlBase + baseSoup('a', {'class':'next'})[0]['href']
-        print nextPageUrl
-        if nextPageUrl == EndUrl:
+        if len(baseSoup('a', {'class':'next disabled'})) != 0:
             print '****hot is end***'
             return
+        nextPageUrl = UrlBase + baseSoup('a', {'class':'next'})[0]['href']
+        print nextPageUrl
+
         self.GetBaseHtml(nextPageUrl)
     
     def ParserDiv(self, divBase):
@@ -93,3 +94,4 @@ if __name__ == "__main__":
             idWriteFd.write(one+'\n')
         idWriteFd.close()
     os.remove('tmp.txt')
+    print "This time Got new %d status" %len(NewAllComments)
