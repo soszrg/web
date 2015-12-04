@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>HomePage</title>
+	</head>
+	<body>
+		<a href="new_blog">New Blog</a>
+		
+		{% for obj in blogs %}
+			<li>
+				<div>
+						<h2><a href=detail/{{obj.id}}>{{obj.title}}</a></h2>
+						<tr>{{obj.timestamp}}</tr>
+				<div>
+				<tr>{{obj.body}}</tr>
+			</li>
+		{% endfor %}
+	<body>
+</html>

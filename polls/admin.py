@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from polls.models import Poll, Choice
+from BlogPost.models import BlogPost
 
 class ChoiceInline(admin.TabularInline):
     model=Choice
@@ -16,4 +17,5 @@ class PollAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
     
 admin.site.register(Poll, PollAdmin)
+admin.site.register(BlogPost)
 # admin.site.register(Choice)
