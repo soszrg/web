@@ -6,3 +6,7 @@ class BlogPost(models.Model):
     body = models.TextField()
     timestamp = models.DateTimeField()
     
+class User(models.Model):
+    name = models.CharField(max_length=10)
+    email = models.EmailField()
+    

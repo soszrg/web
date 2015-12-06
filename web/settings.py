@@ -5,6 +5,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
+    ('zhangrg', '949286727@qq.com'),
 )
 
 MANAGERS = ADMINS
@@ -12,7 +13,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'F:\eclips_proj\web\sqlite.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'G:\zrg\projects\python\web\sqlite.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -158,3 +159,10 @@ LOGGING = {
         },
     }
 }
+
+EMAIL_HOST = 'smtp.126.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'zrg1231@126.com'
+EMAIL_HOST_PASSWORD = 'zrgzrg211231'
+EMAIL_USE_TLS = True
+
