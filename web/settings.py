@@ -13,7 +13,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'G:\zrg\projects\python\web\sqlite.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'F:\eclips_proj\web\sqlite.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'China/shanghai'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -123,13 +123,18 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
     'polls',
     'BlogPost',
+    'BlogPost.utils',
+    'taggit',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+DETAIL_URL="/detail/"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -165,4 +170,8 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'zrg1231@126.com'
 EMAIL_HOST_PASSWORD = 'zrgzrg211231'
 EMAIL_USE_TLS = True
+
+import djcelery
+djcelery.setup_loader()
+BROKER_URL="redis://127.0.0.1:6379/0"
 

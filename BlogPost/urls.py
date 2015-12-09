@@ -12,5 +12,7 @@ urlpatterns = patterns('',
     url(r'^detail/(?P<blog_id>\d+)/$', views.detail, name="detail"),
     url(r"^register/$", views.register),
     url(r'^register/add_user/', views.add_user),
+    url(r"^detail/(?P<blog_id>\d+)/tag/$", views.tag),
+    url(r"^detail/(?P<blog_id>\d+)/tag/add_tag/$", views.add_tags),
     )
 
