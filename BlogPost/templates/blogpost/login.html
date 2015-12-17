@@ -1,0 +1,10 @@
+<html>
+	<form action="login_check/" method="post">{% csrf_token %}
+		<p>Email:</p>
+		<input type="text" name="email"></input>
+		<p>Passwd:</p>
+		<input type="password" name="pwd"></input>
+		<br><br><input type="submit" value='Login'></input>
+	</form>
+	
+</html>
