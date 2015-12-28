@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^polls/', include('polls.urls', namespace='polls')),
     url(r'^blogs/', include('BlogPost.urls')),
+    url(r'^books/', include('books.urls')),
+    
 )
 
 handler404 = 'web.web.views.Page_Not_Found'

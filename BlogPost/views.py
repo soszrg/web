@@ -67,7 +67,7 @@ def add_user(request):
     user = User.objects.model(name=user_name, email=email, pwd=pwd)
     user.save()
     print "send mail--start"
-    SendMail.delay([email])
+#     SendMail.delay([email])
     print "send mail--stop"
     return render(request, "blogpost/register_result.html", None)
 
