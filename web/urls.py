@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^polls/', include('polls.urls', namespace='polls')),
     url(r'^blogs/', include('BlogPost.urls')),
     url(r'^books/', include('books.urls')),
+    url(r'^accounts/', include('accounts.urls'))
     
 )
 

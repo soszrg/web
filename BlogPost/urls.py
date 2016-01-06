@@ -6,7 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^home/$', views.home_page, name='home'),
+    url(r'^home/$', views.home_page, name='blog_home'),
     url(r"^new_blog/$", views.new_blog, name = 'new_blog'),
     url(r'^new_blog/add_blog/$', views.add_blog),
     url(r'^detail/(?P<blog_id>\d+)/$', views.detail, name="detail"),

@@ -113,6 +113,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     'F:/eclips_proj/web/templates',
+    'F:/eclips_proj/web/accounts/templates'
     
 )
 
@@ -124,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djcelery',
+#     'kombu.transport.django',
     'polls',
     'BlogPost',
     'BlogPost.utils',
@@ -131,6 +133,7 @@ INSTALLED_APPS = (
     'books',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'accounts'
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -174,5 +177,5 @@ EMAIL_USE_TLS = True
 
 import djcelery
 djcelery.setup_loader()
-BROKER_URL="redis://127.0.0.1:6379/0"
+BROKER_URL="redis://172.30.15.184:6379/0"
 

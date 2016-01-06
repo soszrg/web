@@ -2,9 +2,9 @@ from django.conf.urls import url, patterns
 from forms import AuthorForm,BookForm,PubForm
 import views
 from django.views.generic.base import TemplateView
-
+from django.contrib.auth import views as authViews
 urlpatterns = patterns('',
-                       url(r'^$', views.home_page),
+                       url(r'^$', views.home_page, name='home_page'),
 #                        (r'^search-form/$', views.search_form),
                        url(r'^search/$', views.search),
                        url(r'^contract/$', views.contract),
@@ -13,5 +13,7 @@ urlpatterns = patterns('',
                        url(r'^new_pub/$', views.new_item, {'form':PubForm, 'type':'publisher'}, name='new_pub'),
                        url(r'^new_book/$', views.new_item, {'form':BookForm, 'type':'book'}, name='new_book'),
                        url(r'^about/$', TemplateView.as_view(template_name='about.html')),
-                       url(r'register/$', views.register, "register"),
+                       url(r'^register/$', views.register, name = "register"),
+#                         url(r'login/$', authViews.login, {'template_name':'login.html'}, name="auth_login"),
+#                        url(r'logout/$', views.logout),
                     )

@@ -6,11 +6,15 @@ from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.timezone import now
 from django.http import HttpResponse
-from BlogPost.utils.tasks import SendMail
+from BlogPost.utils.tasks import SendMail,Add1
 from models import BlogInfo
 from django.core.context_processors import csrf 
-
+res = None
 def home_page(request):
+    global res
+    res = Add1.apply_async(args=[1,2], queue='z3', routing_key='z3')
+    print type(res)
+#     print res.get(timeout=50)
     blogs = BlogPost.objects.all()
     context = Context({'blogs':blogs})
     return render(request, "blogpost/index.html", context)
@@ -51,6 +55,8 @@ def detail(request, blog_id):
     return render(request,"blogpost/detail.html", context)
     
 def register(request):
+    global res
+    print res.get(timeout=50)
     return render(request, "blogpost/register.html", None)
 
 def add_user(request):
@@ -67,7 +73,7 @@ def add_user(request):
     user = User.objects.model(name=user_name, email=email, pwd=pwd)
     user.save()
     print "send mail--start"
-#     SendMail.delay([email])
+    SendMail.apply_async(args=[[email]], queue='z3', routing_key='z3')
     print "send mail--stop"
     return render(request, "blogpost/register_result.html", None)
 
@@ -114,7 +120,7 @@ def login_check(request):
         if pwd != obj.pwd:
             return render(request, "blogpost/error.html", Context({'str':'Password is error'}))
 #         return HttpResponseRedirect(reverse("BlogPost.views.home_page"))
-        return HttpResponseRedirect(reverse("home"))
+        return HttpResponseRedirect(reverse("blog_home"))
         
     
 def login_usr(request, usr):
